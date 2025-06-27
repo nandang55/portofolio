@@ -183,22 +183,48 @@ a.secondary {
     padding: 1rem;
     border-right: none;
     border-bottom: 1px solid var(--gray-alpha-200);
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
   }
 
   .leftSection h1 {
     font-size: 1.2rem;
-    margin: 0 0 0.5rem 0;
+    margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .leftSection h2 {
     font-size: 1rem;
     margin: 0 0 0.25rem 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .leftSection ul {
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 0;
   }
 
   .leftSection li {
-    padding: 0.25rem 0;
+    padding: 0.25rem 0.5rem;
     font-size: 0.9rem;
+    border: 1px solid var(--gray-alpha-200);
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .leftContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-shrink: 0;
   }
 
   .rightSection {
