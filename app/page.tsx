@@ -1,22 +1,30 @@
+'use client';
+
 import Image from "next/image";
 import styles from "./page.module.css";
+import { useProjectYears } from "../hooks/useProjectYears";
 
 export default function Home() {
+  const { years, loading, error } = useProjectYears();
+
   return (
     <div className={styles.page}>
       <div className={styles.container}>
         {/* Bagian Kiri */}
         <div className={styles.leftSection}>
-          <h1>Bagian Kiri</h1>
-          <p>Ini adalah bagian kiri halaman dengan konten yang bisa Anda sesuaikan.</p>
-          <div className={styles.leftContent}>
-            <h2>Fitur Utama</h2>
-            <ul>
-              <li>Navigasi</li>
-              <li>Menu</li>
-              <li>Kontrol</li>
-            </ul>
-          </div>
+          <h1>Daftar Tahun Project</h1>
+          {loading && <p>Memuat data tahun...</p>}
+          {error && <p>Error: {error}</p>}
+          {!loading && !error && (
+            <div className={styles.leftContent}>
+              <h2>Project berdasarkan tahun:</h2>
+              <ul>
+                {years.map((year) => (
+                  <li key={year}>{year}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* Bagian Kanan */}
