@@ -164,46 +164,6 @@ export default function Home() {
                 { type: 'image', src: 'https://placehold.co/180x120?text=Img6' },
               ]}
             />
-            <Image
-              className={styles.logo}
-              src="/next.svg"
-              alt="Next.js logo"
-              width={180}
-              height={38}
-              priority
-            />
-            <ol>
-              <li>
-                {t('common.getStarted')} <code>app/page.tsx</code>.
-              </li>
-              <li>{t('common.saveChanges')}</li>
-            </ol>
-
-            <div className={styles.ctas}>
-              <a
-                className={styles.primary}
-                href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  className={styles.logo}
-                  src="/vercel.svg"
-                  alt="Vercel logomark"
-                  width={20}
-                  height={20}
-                />
-                {t('common.deployNow')}
-              </a>
-              <a
-                href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.secondary}
-              >
-                {t('common.readDocs')}
-              </a>
-            </div>
           </main>
         </div>
       </div>

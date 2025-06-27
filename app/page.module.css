@@ -149,7 +149,7 @@
   border-radius: 12px;
   border-left: 4px solid var(--primary);
   color: #fff;
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
 }
 
 .scrollHint {
@@ -168,14 +168,15 @@
 }
 
 .rightSection {
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: flex-start;
   width: 70%;
+  max-height: 100vh;
   padding: 2rem;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
   overflow-y: auto;
-  max-height: 100vh;
-  box-sizing: border-box;
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -361,7 +362,9 @@ a.secondary {
 
   .rightSection {
     width: 100%;
-    padding: 1rem;
+    padding: 1rem 0.5rem;
+    max-height: none;
+    overflow-y: visible;
   }
 
   .page {
@@ -369,7 +372,16 @@ a.secondary {
   }
 
   .main {
-    align-items: center;
+    width: 100%;
+    padding: 0;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .main>div {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
   }
 
   .main ol {
