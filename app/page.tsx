@@ -14,6 +14,7 @@ export default function Home() {
   const scrollCountRef = useRef(0);
   const scrollThreshold = 3;
   const { locale, setLocale, messages } = useLocalization();
+  const rightSectionRef = useRef<HTMLDivElement>(null);
 
   // Set tahun terbaru sebagai default saat data dimuat
   useEffect(() => {
@@ -51,6 +52,30 @@ export default function Home() {
     setTimeout(() => {
       scrollCountRef.current = 0;
     }, 1000);
+  };
+
+  // Scroll handler untuk rightSection
+  const handleRightSectionScroll = () => {
+    const el = rightSectionRef.current;
+    if (!el) return;
+    // Scroll ke bawah: select tahun berikutnya
+    if (el.scrollTop + el.clientHeight >= el.scrollHeight - 2) {
+      if (years.length > 0 && selectedYear != null) {
+        const idx = years.findIndex(y => y === selectedYear);
+        if (idx < years.length - 1) {
+          setSelectedYear(years[idx + 1]);
+        }
+      }
+    }
+    // Scroll ke atas: select tahun sebelumnya
+    if (el.scrollTop <= 2) {
+      if (years.length > 0 && selectedYear != null) {
+        const idx = years.findIndex(y => y === selectedYear);
+        if (idx > 0) {
+          setSelectedYear(years[idx - 1]);
+        }
+      }
+    }
   };
 
   // Helper function untuk translation
@@ -117,7 +142,7 @@ export default function Home() {
         </div>
 
         {/* Bagian Kanan */}
-        <div className={styles.rightSection}>
+        <div className={styles.rightSection} ref={rightSectionRef} onScroll={handleRightSectionScroll}>
           <main className={styles.main}>
             {/* 3 ProjectCard dummy */}
             <ProjectCard
