@@ -1,15 +1,16 @@
 .page {
-  --gray-rgb: 0, 0, 0;
-  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
-  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+  --gray-rgb: 87, 129, 105;
+  --gray-alpha-200: rgba(var(--gray-rgb), 0.18);
+  --gray-alpha-100: rgba(var(--gray-rgb), 0.08);
 
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
+  --button-primary-hover: var(--primary-dark);
+  --button-secondary-hover: var(--primary-light);
 
   display: grid;
   grid-template-rows: 1fr auto;
   min-height: 100svh;
   font-family: var(--font-geist-sans);
+  background: var(--background);
 }
 
 .container {
@@ -18,9 +19,9 @@
 }
 
 .leftSection {
-  background: var(--gray-alpha-100);
+  background: var(--primary-dark);
   padding: 2rem;
-  border-right: 1px solid var(--gray-alpha-200);
+  border-right: 1px solid #232826;
   width: 30%;
   display: flex;
   flex-direction: column;
@@ -107,7 +108,7 @@
 
 .yearItem {
   padding: 0.75rem 1rem;
-  border: 1px solid var(--gray-alpha-200);
+  border: 1.5px solid var(--primary-dark);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -117,18 +118,21 @@
   position: relative;
   width: 100%;
   box-sizing: border-box;
+  background: transparent;
+  color: var(--foreground);
 }
 
 .yearItem:hover {
-  background: var(--gray-alpha-100);
-  border-color: var(--gray-alpha-200);
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary-dark);
   transform: translateX(4px);
 }
 
 .selectedYear {
-  background: var(--foreground);
-  color: var(--background);
-  border-color: var(--foreground);
+  background: var(--primary-light);
+  color: #fff;
+  border-color: #fff;
   font-weight: 600;
 }
 
@@ -141,16 +145,26 @@
   margin-top: 1rem;
   width: 100%;
   padding: 1rem;
-  background: var(--gray-alpha-100);
-  border-radius: 8px;
-  border-left: 4px solid var(--foreground);
+  background: #232826;
+  border-radius: 12px;
+  border-left: 4px solid var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
 }
 
 .scrollHint {
-  font-size: 0.9rem;
-  color: var(--gray-alpha-200);
+  font-size: 1rem;
+  color: #b7c9b7;
   margin: 0.5rem 0 0 0;
   font-style: italic;
+  font-weight: 400;
+}
+
+.yearInfo p {
+  margin-bottom: 0.25rem;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .rightSection {
@@ -168,7 +182,7 @@
     --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
 
     --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
+    --button-secondary-hover: black;
   }
 }
 
@@ -227,20 +241,23 @@
 }
 
 a.primary {
-  background: var(--foreground);
-  color: var(--background);
+  background: var(--primary-dark);
+  color: #fff;
   gap: 8px;
 }
 
 a.secondary {
-  border-color: var(--gray-alpha-200);
+  border-color: var(--primary-light);
   min-width: 158px;
+  color: var(--foreground);
 }
 
 .footer {
   grid-row-start: 3;
   display: flex;
   gap: 24px;
+  background: var(--primary-dark);
+  color: #fff;
 }
 
 .footer a {
@@ -256,12 +273,12 @@ a.secondary {
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
-    background: var(--button-primary-hover);
+    background: var(--primary);
     border-color: transparent;
   }
 
   a.secondary:hover {
-    background: var(--button-secondary-hover);
+    background: var(--primary-light);
     border-color: transparent;
   }
 
