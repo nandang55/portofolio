@@ -27,10 +27,36 @@
   gap: 1rem;
 }
 
-.leftSection h1 {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.header h1 {
   font-size: 1.5rem;
   font-weight: 600;
-  margin: 0 0 1rem 0;
+  margin: 0;
+}
+
+.language-switcher {
+  position: relative;
+}
+
+.language-select {
+  padding: 0.5rem;
+  border: 1px solid var(--gray-alpha-200);
+  border-radius: 4px;
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.language-select:focus {
+  outline: none;
+  border-color: var(--foreground);
 }
 
 .leftSection h2 {
@@ -244,18 +270,23 @@ a.secondary {
     align-items: center;
   }
 
-  .leftSection h1 {
-    font-size: 1.2rem;
-    margin: 0;
-    white-space: nowrap;
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0;
     flex-shrink: 0;
   }
 
-  .leftSection h2 {
+  .header h1 {
     font-size: 1rem;
-    margin: 0 0 0.25rem 0;
+    margin: 0;
     white-space: nowrap;
-    flex-shrink: 0;
+  }
+
+  .language-select {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
   }
 
   .yearList {

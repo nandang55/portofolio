@@ -4,12 +4,15 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import { useProjectYears } from "../hooks/useProjectYears";
 import { useState, useEffect, useRef } from "react";
+import { useLocalization } from "../hooks/useLocalization";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
 export default function Home() {
   const { years, loading, error } = useProjectYears();
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const scrollCountRef = useRef(0);
-  const scrollThreshold = 3; // Perlu scroll 3 kali baru berubah tahun
+  const scrollThreshold = 3;
+  const { locale, setLocale, messages } = useLocalization();
 
   // Set tahun terbaru sebagai default saat data dimuat
   useEffect(() => {
@@ -22,7 +25,7 @@ export default function Home() {
   const handleYearScroll = (e: React.WheelEvent) => {
     if (years.length === 0) return;
 
-    e.preventDefault(); // Mencegah scroll default
+    e.preventDefault();
     
     scrollCountRef.current += 1;
 
@@ -49,17 +52,41 @@ export default function Home() {
     }, 1000);
   };
 
+  // Helper function untuk translation
+  const t = (key: string, params?: any) => {
+    const keys = key.split('.');
+    let value = messages;
+    
+    for (const k of keys) {
+      value = value?.[k];
+    }
+    
+    if (typeof value === 'string' && params) {
+      return value.replace(/\{(\w+)\}/g, (match, param) => {
+        return params[param] || match;
+      });
+    }
+    
+    return value || key;
+  };
+
   return (
     <div className={styles.page}>
       <div className={styles.container}>
         {/* Bagian Kiri */}
         <div className={styles.leftSection} onWheel={handleYearScroll}>
-          <h1>Daftar Tahun Project</h1>
-          {loading && <p>Memuat data tahun...</p>}
-          {error && <p>Error: {error}</p>}
+          <div className={styles.header}>
+            <h1>{t('home.title')}</h1>
+            <LanguageSwitcher 
+              currentLocale={locale} 
+              onLanguageChange={setLocale} 
+            />
+          </div>
+          {loading && <p>{t('home.loading')}</p>}
+          {error && <p>{t('home.error', { error })}</p>}
           {!loading && !error && (
             <div className={styles.leftContent}>
-              <h2>Project berdasarkan tahun:</h2>
+              <h2>{t('home.projectByYear')}</h2>
               <div className={styles.yearList}>
                 {years.map((year) => (
                   <div
@@ -78,9 +105,9 @@ export default function Home() {
               </div>
               {selectedYear && (
                 <div className={styles.yearInfo}>
-                  <p>Tahun terpilih: <strong>{selectedYear}</strong></p>
+                  <p>{t('home.selectedYear', { year: selectedYear })}</p>
                   <p className={styles.scrollHint}>
-                    Scroll {scrollThreshold} kali untuk mengubah tahun
+                    {t('home.scrollHint', { count: scrollThreshold })}
                   </p>
                 </div>
               )}
@@ -101,9 +128,9 @@ export default function Home() {
             />
             <ol>
               <li>
-                Get started by editing <code>app/page.tsx</code>.
+                {t('common.getStarted')} <code>app/page.tsx</code>.
               </li>
-              <li>Save and see your changes instantly.</li>
+              <li>{t('common.saveChanges')}</li>
             </ol>
 
             <div className={styles.ctas}>
@@ -120,7 +147,7 @@ export default function Home() {
                   width={20}
                   height={20}
                 />
-                Deploy now
+                {t('common.deployNow')}
               </a>
               <a
                 href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -128,7 +155,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className={styles.secondary}
               >
-                Read our docs
+                {t('common.readDocs')}
               </a>
             </div>
           </main>
@@ -148,7 +175,7 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Learn
+          {t('footer.learn')}
         </a>
         <a
           href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -162,7 +189,7 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Examples
+          {t('footer.examples')}
         </a>
         <a
           href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -176,7 +203,7 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Go to nextjs.org →
+          {t('footer.goToNextjs')}
         </a>
       </footer>
     </div>

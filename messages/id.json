@@ -1,0 +1,31 @@
+{
+  "navigation": {
+    "home": "Beranda",
+    "projects": "Proyek",
+    "about": "Tentang",
+    "contact": "Kontak"
+  },
+  "home": {
+    "title": "Daftar Tahun Project",
+    "loading": "Memuat data tahun...",
+    "error": "Error: {error}",
+    "projectByYear": "Project berdasarkan tahun:",
+    "selectedYear": "Tahun terpilih: {year}",
+    "scrollHint": "Scroll {count} kali untuk mengubah tahun",
+    "yearList": "Daftar Tahun"
+  },
+  "common": {
+    "learn": "Belajar",
+    "examples": "Contoh",
+    "goToNextjs": "Kunjungi nextjs.org →",
+    "deployNow": "Deploy Sekarang",
+    "readDocs": "Baca Dokumentasi",
+    "getStarted": "Mulai dengan mengedit",
+    "saveChanges": "Simpan dan lihat perubahan secara instan"
+  },
+  "footer": {
+    "learn": "Belajar",
+    "examples": "Contoh",
+    "goToNextjs": "Kunjungi nextjs.org →"
+  }
+} 

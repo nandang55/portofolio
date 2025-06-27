@@ -1,0 +1,31 @@
+{
+  "navigation": {
+    "home": "首页",
+    "projects": "项目",
+    "about": "关于",
+    "contact": "联系"
+  },
+  "home": {
+    "title": "项目年份列表",
+    "loading": "正在加载年份数据...",
+    "error": "错误: {error}",
+    "projectByYear": "按年份分类的项目:",
+    "selectedYear": "选中的年份: {year}",
+    "scrollHint": "滚动 {count} 次来更改年份",
+    "yearList": "年份列表"
+  },
+  "common": {
+    "learn": "学习",
+    "examples": "示例",
+    "goToNextjs": "访问 nextjs.org →",
+    "deployNow": "立即部署",
+    "readDocs": "阅读文档",
+    "getStarted": "开始编辑",
+    "saveChanges": "保存并立即查看更改"
+  },
+  "footer": {
+    "learn": "学习",
+    "examples": "示例",
+    "goToNextjs": "访问 nextjs.org →"
+  }
+} 

@@ -1,0 +1,31 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "about": "Acerca de",
+    "contact": "Contacto"
+  },
+  "home": {
+    "title": "Lista de Años de Proyectos",
+    "loading": "Cargando datos de años...",
+    "error": "Error: {error}",
+    "projectByYear": "Proyectos por año:",
+    "selectedYear": "Año seleccionado: {year}",
+    "scrollHint": "Desplázate {count} veces para cambiar el año",
+    "yearList": "Lista de Años"
+  },
+  "common": {
+    "learn": "Aprender",
+    "examples": "Ejemplos",
+    "goToNextjs": "Ir a nextjs.org →",
+    "deployNow": "Implementar Ahora",
+    "readDocs": "Leer documentación",
+    "getStarted": "Comienza editando",
+    "saveChanges": "Guarda y ve tus cambios al instante"
+  },
+  "footer": {
+    "learn": "Aprender",
+    "examples": "Ejemplos",
+    "goToNextjs": "Ir a nextjs.org →"
+  }
+} 
