@@ -3,11 +3,13 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { useProjectYears } from "../hooks/useProjectYears";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Home() {
   const { years, loading, error } = useProjectYears();
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const scrollCountRef = useRef(0);
+  const scrollThreshold = 3; // Perlu scroll 3 kali baru berubah tahun
 
   // Set tahun terbaru sebagai default saat data dimuat
   useEffect(() => {
@@ -16,22 +18,35 @@ export default function Home() {
     }
   }, [years, selectedYear]);
 
-  // Handle scroll untuk mengubah tahun
+  // Handle scroll untuk mengubah tahun dengan debounce
   const handleYearScroll = (e: React.WheelEvent) => {
     if (years.length === 0) return;
 
-    const currentIndex = years.findIndex(year => year === selectedYear);
-    let newIndex = currentIndex;
+    e.preventDefault(); // Mencegah scroll default
+    
+    scrollCountRef.current += 1;
 
-    if (e.deltaY > 0) {
-      // Scroll down - pilih tahun sebelumnya
-      newIndex = Math.min(currentIndex + 1, years.length - 1);
-    } else {
-      // Scroll up - pilih tahun berikutnya
-      newIndex = Math.max(currentIndex - 1, 0);
+    // Hanya ubah tahun jika sudah mencapai threshold
+    if (scrollCountRef.current >= scrollThreshold) {
+      const currentIndex = years.findIndex(year => year === selectedYear);
+      let newIndex = currentIndex;
+
+      if (e.deltaY > 0) {
+        // Scroll down - pilih tahun sebelumnya
+        newIndex = Math.min(currentIndex + 1, years.length - 1);
+      } else {
+        // Scroll up - pilih tahun berikutnya
+        newIndex = Math.max(currentIndex - 1, 0);
+      }
+
+      setSelectedYear(years[newIndex]);
+      scrollCountRef.current = 0; // Reset counter
     }
 
-    setSelectedYear(years[newIndex]);
+    // Reset counter setelah 1 detik jika tidak ada scroll lagi
+    setTimeout(() => {
+      scrollCountRef.current = 0;
+    }, 1000);
   };
 
   return (
@@ -64,7 +79,9 @@ export default function Home() {
               {selectedYear && (
                 <div className={styles.yearInfo}>
                   <p>Tahun terpilih: <strong>{selectedYear}</strong></p>
-                  <p className={styles.scrollHint}>Scroll untuk mengubah tahun</p>
+                  <p className={styles.scrollHint}>
+                    Scroll {scrollThreshold} kali untuk mengubah tahun
+                  </p>
                 </div>
               )}
             </div>
