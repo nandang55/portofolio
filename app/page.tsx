@@ -3,26 +3,70 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { useProjectYears } from "../hooks/useProjectYears";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const { years, loading, error } = useProjectYears();
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+
+  // Set tahun terbaru sebagai default saat data dimuat
+  useEffect(() => {
+    if (years.length > 0 && selectedYear === null) {
+      setSelectedYear(years[0]);
+    }
+  }, [years, selectedYear]);
+
+  // Handle scroll untuk mengubah tahun
+  const handleYearScroll = (e: React.WheelEvent) => {
+    if (years.length === 0) return;
+
+    const currentIndex = years.findIndex(year => year === selectedYear);
+    let newIndex = currentIndex;
+
+    if (e.deltaY > 0) {
+      // Scroll down - pilih tahun sebelumnya
+      newIndex = Math.min(currentIndex + 1, years.length - 1);
+    } else {
+      // Scroll up - pilih tahun berikutnya
+      newIndex = Math.max(currentIndex - 1, 0);
+    }
+
+    setSelectedYear(years[newIndex]);
+  };
 
   return (
     <div className={styles.page}>
       <div className={styles.container}>
         {/* Bagian Kiri */}
-        <div className={styles.leftSection}>
+        <div className={styles.leftSection} onWheel={handleYearScroll}>
           <h1>Daftar Tahun Project</h1>
           {loading && <p>Memuat data tahun...</p>}
           {error && <p>Error: {error}</p>}
           {!loading && !error && (
             <div className={styles.leftContent}>
               <h2>Project berdasarkan tahun:</h2>
-              <ul>
+              <div className={styles.yearList}>
                 {years.map((year) => (
-                  <li key={year}>{year}</li>
+                  <div
+                    key={year}
+                    className={`${styles.yearItem} ${
+                      selectedYear === year ? styles.selectedYear : ''
+                    }`}
+                    onClick={() => setSelectedYear(year)}
+                  >
+                    {year}
+                    {selectedYear === year && (
+                      <span className={styles.selectedIndicator}>✓</span>
+                    )}
+                  </div>
                 ))}
-              </ul>
+              </div>
+              {selectedYear && (
+                <div className={styles.yearInfo}>
+                  <p>Tahun terpilih: <strong>{selectedYear}</strong></p>
+                  <p className={styles.scrollHint}>Scroll untuk mengubah tahun</p>
+                </div>
+              )}
             </div>
           )}
         </div>
