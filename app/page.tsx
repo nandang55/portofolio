@@ -86,7 +86,7 @@ export default function Home() {
           {error && <p>{t('home.error', { error })}</p>}
           {!loading && !error && (
             <div className={styles.leftContent}>
-              <h2>{t('home.projectByYear')}</h2>
+              <div className={styles.projectByYearLabel}>{t('home.projectByYear')}</div>
               <div className={styles.yearList}>
                 {years.map((year) => (
                   <div

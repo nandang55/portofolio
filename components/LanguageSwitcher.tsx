@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react';
 type Locale = 'id' | 'en' | 'sp' | 'cn' | 'de' | 'nl';
 
 const languages = [
-  { code: 'id', name: 'Bahasa Indonesia', flag: '🇮🇩' },
-  { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'sp', name: 'Español', flag: '🇪🇸' },
-  { code: 'cn', name: '中文', flag: '🇨🇳' },
-  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-  { code: 'nl', name: 'Nederlands', flag: '🇳🇱' }
+  { code: 'id', name: 'ID', flag: '🇮🇩' },
+  { code: 'en', name: 'EN', flag: '🇺🇸' },
+  { code: 'sp', name: 'ES', flag: '🇪🇸' },
+  { code: 'cn', name: 'CN', flag: '🇨🇳' },
+  { code: 'de', name: 'DE', flag: '🇩🇪' },
+  { code: 'nl', name: 'NL', flag: '🇳🇱' }
 ];
 
 interface LanguageSwitcherProps {
@@ -36,7 +36,7 @@ export const LanguageSwitcher = ({ onLanguageChange, currentLocale }: LanguageSw
     return (
       <div className="language-switcher">
         <select className="language-select" disabled>
-          <option>Loading...</option>
+          <option>...</option>
         </select>
       </div>
     );
