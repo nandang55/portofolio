@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, createContext, useContext } from 'react';
 
-type Locale = 'id' | 'en' | 'sp' | 'cn';
+type Locale = 'id' | 'en' | 'sp' | 'cn' | 'de' | 'nl';
 
 interface LocalizationContextType {
   locale: Locale;
@@ -28,7 +28,7 @@ export const LocalizationProvider = ({ children }: { children: React.ReactNode }
   useEffect(() => {
     // Ambil bahasa dari localStorage saat komponen mount
     const savedLocale = localStorage.getItem('preferred-language') as Locale;
-    if (savedLocale && ['id', 'en', 'sp', 'cn'].includes(savedLocale)) {
+    if (savedLocale && ['id', 'en', 'sp', 'cn', 'de', 'nl'].includes(savedLocale)) {
       setLocaleState(savedLocale);
     }
     setMounted(true);

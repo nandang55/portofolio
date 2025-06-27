@@ -1,0 +1,31 @@
+{
+  "navigation": {
+    "home": "Startseite",
+    "projects": "Projekte",
+    "about": "Über uns",
+    "contact": "Kontakt"
+  },
+  "home": {
+    "title": "Projektjahr-Liste",
+    "loading": "Lade Jahresdaten...",
+    "error": "Fehler: {error}",
+    "projectByYear": "Projekte nach Jahr:",
+    "selectedYear": "Ausgewähltes Jahr: {year}",
+    "scrollHint": "Scrollen Sie {count} mal, um das Jahr zu ändern",
+    "yearList": "Jahresliste"
+  },
+  "common": {
+    "learn": "Lernen",
+    "examples": "Beispiele",
+    "goToNextjs": "Gehe zu nextjs.org →",
+    "deployNow": "Jetzt bereitstellen",
+    "readDocs": "Dokumentation lesen",
+    "getStarted": "Beginnen Sie mit der Bearbeitung",
+    "saveChanges": "Speichern und Änderungen sofort sehen"
+  },
+  "footer": {
+    "learn": "Lernen",
+    "examples": "Beispiele",
+    "goToNextjs": "Gehe zu nextjs.org →"
+  }
+} 
