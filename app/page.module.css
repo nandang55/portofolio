@@ -171,8 +171,11 @@
   width: 70%;
   padding: 2rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  overflow-y: auto;
+  max-height: 100vh;
+  box-sizing: border-box;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -187,10 +190,12 @@
 }
 
 .main {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 32px;
   grid-row-start: 2;
+  align-items: center;
 }
 
 .main ol {

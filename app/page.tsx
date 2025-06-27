@@ -6,6 +6,7 @@ import { useProjectYears } from "../hooks/useProjectYears";
 import { useState, useEffect, useRef } from "react";
 import { useLocalization } from "../hooks/useLocalization";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { ProjectCard } from "../components/ProjectCard";
 
 export default function Home() {
   const { years, loading, error } = useProjectYears();
@@ -118,6 +119,51 @@ export default function Home() {
         {/* Bagian Kanan */}
         <div className={styles.rightSection}>
           <main className={styles.main}>
+            {/* 3 ProjectCard dummy */}
+            <ProjectCard
+              appName="GreenApp"
+              companyName="GreenTech"
+              companyLogo="https://placehold.co/60x60?text=GT"
+              appLogo="https://placehold.co/60x60?text=GA"
+              country="Germany"
+              startDate="2023-01"
+              endDate="2023-12"
+              description="Aplikasi monitoring lingkungan dengan fitur AI dan IoT."
+              media={[
+                { type: 'image', src: 'https://placehold.co/180x120?text=Img1' },
+                { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                { type: 'image', src: 'https://placehold.co/180x120?text=Img2' },
+              ]}
+            />
+            <ProjectCard
+              appName="EduLearn"
+              companyName="EduSoft"
+              companyLogo="https://placehold.co/60x60?text=ES"
+              appLogo="https://placehold.co/60x60?text=EL"
+              country="Netherlands"
+              startDate="2022-03"
+              endDate="2022-11"
+              description="Platform pembelajaran daring interaktif untuk sekolah dan universitas."
+              media={[
+                { type: 'image', src: 'https://placehold.co/180x120?text=Img3' },
+                { type: 'image', src: 'https://placehold.co/180x120?text=Img4' },
+                { type: 'video', src: 'https://www.w3schools.com/html/movie.mp4' },
+              ]}
+            />
+            <ProjectCard
+              appName="HealthTrack"
+              companyName="MediCare"
+              companyLogo="https://placehold.co/60x60?text=MC"
+              appLogo="https://placehold.co/60x60?text=HT"
+              country="Spain"
+              startDate="2021-06"
+              endDate="2022-01"
+              description="Aplikasi pelacakan kesehatan dan konsultasi dokter online."
+              media={[
+                { type: 'image', src: 'https://placehold.co/180x120?text=Img5' },
+                { type: 'image', src: 'https://placehold.co/180x120?text=Img6' },
+              ]}
+            />
             <Image
               className={styles.logo}
               src="/next.svg"
