@@ -14,7 +14,8 @@ export const useProjectYears = () => {
       // Mengambil start_date dan end_date dari tabel projects
       const { data, error } = await supabase
         .from('projects')
-        .select('start_date, end_date');
+        .select('start_date, end_date')
+        .order('start_date', { ascending: true });
 
       if (error) {
         throw error;

@@ -32,6 +32,7 @@ export const useProjectsByYear = (year: number | null) => {
       .select('*')
       .gte('start_date', `${year}-01-01`)
       .lte('start_date', `${year}-12-31`)
+      .order('start_date', { ascending: false })
       .then(({ data, error }) => {
         if (error) {
           setError(error.message);
