@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { useUser } from "./UserContext";
+import { useRouter } from "next/navigation";
 
 const messages = {
   id: {
@@ -37,6 +39,8 @@ const messages = {
 
 export default function Home() {
   const [locale, setLocale] = useState('id');
+  const { user } = useUser();
+  const router = useRouter();
 
   useEffect(() => {
     // Ambil preferensi bahasa dari localStorage jika ada
@@ -51,6 +55,15 @@ export default function Home() {
 
   const t = (key: 'title' | 'desc' | 'create') => {
     return messages[locale as keyof typeof messages]?.[key] || messages['en'][key];
+  };
+
+  const handleCreate = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!user) {
+      router.push("/login");
+    } else {
+      router.push("/create");
+    }
   };
 
   return (
@@ -93,7 +106,8 @@ export default function Home() {
         <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1rem' }}>{t('title')}</h1>
         <p style={{ fontSize: '1.2rem', fontWeight: 400 }}>{t('desc')}</p>
         <a
-          href="/create"
+          href="#"
+          onClick={handleCreate}
           style={{
             display: 'inline-block',
             marginTop: '2rem',

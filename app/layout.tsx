@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { LocalizationProvider } from "../hooks/useLocalization";
+import { UserProvider } from './UserContext';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body className={inter.className}>
-        <LocalizationProvider>
-          {children}
-        </LocalizationProvider>
+        <UserProvider>
+          <LocalizationProvider>
+            {children}
+          </LocalizationProvider>
+        </UserProvider>
       </body>
     </html>
   );
