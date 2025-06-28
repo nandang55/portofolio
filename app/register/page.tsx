@@ -230,180 +230,85 @@ export default function RegisterPage() {
           {t("title")}
         </h2>
         {/* Section Profile Information */}
-        <div
-          style={{
-            marginBottom: 32,
-            padding: isMobile ? "1rem" : "2rem",
-            background: "rgba(44, 54, 48, 0.95)",
-            borderRadius: 16,
-            boxShadow: "0 1px 8px 0 rgba(0,0,0,0.08)",
-            width: "100%",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          <div
-            style={{
-              fontWeight: 700,
-              color: "#fff",
-              fontSize: "1.15rem",
-              marginBottom: 20,
-            }}
-          >
-            {t("profile")}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 18,
-            }}
-          >
-            {/* Foto Profil */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 8,
-                width: "100%",
-              }}
-            >
-              <label
-                style={{ color: "#b7c9b7", fontWeight: 500, marginBottom: 4 }}
-              >
-                {t("photo")}
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => setPhoto(e.target.files?.[0] || null)}
-                style={{ marginBottom: 8 }}
-              />
-              {photo && (
-                <img
-                  src={URL.createObjectURL(photo)}
-                  alt="preview"
-                  style={{
-                    width: 72,
-                    height: 72,
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                    marginTop: 4,
-                    border: "2px solid #40604e",
-                  }}
-                />
-              )}
+        <div style={{
+          marginBottom: 32,
+          padding: isMobile ? '1rem' : '2rem',
+          background: 'rgba(44, 54, 48, 0.95)',
+          borderRadius: 16,
+          boxShadow: '0 1px 8px 0 rgba(0,0,0,0.08)',
+          width: '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}>
+          <div style={{ fontWeight: 700, color: '#fff', fontSize: '1.15rem', marginBottom: 20 }}>{t('profile')}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '180px 1fr', gap: 24, alignItems: 'flex-start', width: '100%' }}>
+            {/* Foto Profil di kiri */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+              <label style={{ color: '#b7c9b7', fontWeight: 500, marginBottom: 4 }}>{t('photo')}</label>
+              <input type="file" accept="image/*" onChange={e => setPhoto(e.target.files?.[0] || null)} style={{ marginBottom: 8 }} />
+              {photo && <img src={URL.createObjectURL(photo)} alt="preview" style={{ width: 72, height: 72, borderRadius: '50%', objectFit: 'cover', marginTop: 4, border: '2px solid #40604e' }} />}
             </div>
-            {/* Username, Nama Depan, Nama Belakang */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr",
-                gap: 16,
-                width: "100%",
-              }}
-            >
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <label
-                  style={{ color: "#b7c9b7", fontWeight: 500, marginBottom: 4 }}
-                >
-                  {t("username")}
-                </label>
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+            {/* Nama Depan, Nama Belakang, Deskripsi di kanan */}
+            <div style={{ width: '100%' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 16, marginBottom: 12 }}>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <label style={{ color: '#b7c9b7', fontWeight: 500, marginBottom: 4 }}>{t('firstname')}</label>
+                  <input
+                    type="text"
+                    value={firstname}
+                    onChange={e => setFirstname(e.target.value)}
+                    style={{
+                      padding: isMobile ? '0.6rem 0.8rem' : '0.75rem 1rem',
+                      borderRadius: 8,
+                      border: '1.5px solid #40604e',
+                      fontSize: isMobile ? '0.95rem' : '1rem',
+                      marginBottom: 8,
+                      outline: 'none',
+                      background: '#232826',
+                      color: '#fff',
+                    }}
+                    placeholder={t('firstname')}
+                  />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <label style={{ color: '#b7c9b7', fontWeight: 500, marginBottom: 4 }}>{t('lastname')}</label>
+                  <input
+                    type="text"
+                    value={lastname}
+                    onChange={e => setLastname(e.target.value)}
+                    style={{
+                      padding: isMobile ? '0.6rem 0.8rem' : '0.75rem 1rem',
+                      borderRadius: 8,
+                      border: '1.5px solid #40604e',
+                      fontSize: isMobile ? '0.95rem' : '1rem',
+                      marginBottom: 8,
+                      outline: 'none',
+                      background: '#232826',
+                      color: '#fff',
+                    }}
+                    placeholder={t('lastname')}
+                  />
+                </div>
+              </div>
+              <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+                <label style={{ color: '#b7c9b7', fontWeight: 500, marginBottom: 4 }}>{t('description')}</label>
+                <textarea
+                  value={desc}
+                  onChange={e => setDesc(e.target.value)}
                   style={{
-                    padding: isMobile ? "0.6rem 0.8rem" : "0.75rem 1rem",
+                    padding: isMobile ? '0.6rem 0.8rem' : '0.75rem 1rem',
                     borderRadius: 8,
-                    border: "1.5px solid #40604e",
-                    fontSize: isMobile ? "0.95rem" : "1rem",
-                    marginBottom: 8,
-                    outline: "none",
-                    background: "#232826",
-                    color: "#fff",
+                    border: '1.5px solid #40604e',
+                    fontSize: isMobile ? '0.95rem' : '1rem',
+                    minHeight: 60,
+                    resize: 'vertical',
+                    outline: 'none',
+                    background: '#232826',
+                    color: '#fff',
                   }}
-                  placeholder={t("username")}
+                  placeholder={t('description')}
                 />
               </div>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <label
-                  style={{ color: "#b7c9b7", fontWeight: 500, marginBottom: 4 }}
-                >
-                  {t("firstname")}
-                </label>
-                <input
-                  type="text"
-                  value={firstname}
-                  onChange={(e) => setFirstname(e.target.value)}
-                  style={{
-                    padding: isMobile ? "0.6rem 0.8rem" : "0.75rem 1rem",
-                    borderRadius: 8,
-                    border: "1.5px solid #40604e",
-                    fontSize: isMobile ? "0.95rem" : "1rem",
-                    marginBottom: 8,
-                    outline: "none",
-                    background: "#232826",
-                    color: "#fff",
-                  }}
-                  placeholder={t("firstname")}
-                />
-              </div>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <label
-                  style={{ color: "#b7c9b7", fontWeight: 500, marginBottom: 4 }}
-                >
-                  {t("lastname")}
-                </label>
-                <input
-                  type="text"
-                  value={lastname}
-                  onChange={(e) => setLastname(e.target.value)}
-                  style={{
-                    padding: isMobile ? "0.6rem 0.8rem" : "0.75rem 1rem",
-                    borderRadius: 8,
-                    border: "1.5px solid #40604e",
-                    fontSize: isMobile ? "0.95rem" : "1rem",
-                    marginBottom: 8,
-                    outline: "none",
-                    background: "#232826",
-                    color: "#fff",
-                  }}
-                  placeholder={t("lastname")}
-                />
-              </div>
-            </div>
-            {/* Description full width */}
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <label
-                style={{ color: "#b7c9b7", fontWeight: 500, marginBottom: 4 }}
-              >
-                {t("description")}
-              </label>
-              <textarea
-                value={desc}
-                onChange={(e) => setDesc(e.target.value)}
-                style={{
-                  padding: isMobile ? "0.6rem 0.8rem" : "0.75rem 1rem",
-                  borderRadius: 8,
-                  border: "1.5px solid #40604e",
-                  fontSize: isMobile ? "0.95rem" : "1rem",
-                  minHeight: 60,
-                  resize: "vertical",
-                  outline: "none",
-                  background: "#232826",
-                  color: "#fff",
-                }}
-                placeholder={t("description")}
-              />
             </div>
           </div>
         </div>
