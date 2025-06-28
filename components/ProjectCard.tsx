@@ -27,6 +27,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const [logoError, setLogoError] = useState(false);
   const [companyLogoError, setCompanyLogoError] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   // Ambil inisial dari nama (maksimal 2 huruf)
   const getInitials = (name: string) => {
@@ -42,6 +43,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     typeof window !== "undefined" &&
     window.matchMedia("(max-width: 768px)").matches;
 
+  // Handler close modal
+  const closeModal = () => setSelectedImage(null);
+
   return (
     <div
       style={{
@@ -54,8 +58,76 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         maxWidth: isMobile ? "100%" : 800,
         width: "100%",
         margin: "0 auto",
+        position: "relative",
       }}
     >
+      {/* Modal Preview Gambar */}
+      {selectedImage && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0,0,0,0.7)",
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onClick={closeModal}
+        >
+          <div
+            style={{
+              position: "relative",
+              maxWidth: isMobile ? "90vw" : "70vw",
+              maxHeight: isMobile ? "70vh" : "80vh",
+              background: "#232826",
+              borderRadius: 12,
+              boxShadow: "0 4px 32px 0 rgba(0,0,0,0.25)",
+              padding: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <img
+              src={selectedImage}
+              alt="Preview"
+              style={{
+                maxWidth: isMobile ? "90vw" : "70vw",
+                maxHeight: isMobile ? "70vh" : "80vh",
+                borderRadius: 8,
+                background: "#181c1a",
+                objectFit: "contain",
+                display: "block",
+              }}
+            />
+            <button
+              onClick={closeModal}
+              style={{
+                position: "absolute",
+                top: 8,
+                right: 8,
+                background: "#40604e",
+                color: "#fff",
+                border: "none",
+                borderRadius: 20,
+                width: 32,
+                height: 32,
+                fontSize: 20,
+                cursor: "pointer",
+                zIndex: 2,
+              }}
+              aria-label="Tutup"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
       <div
         style={{
           display: "flex",
@@ -248,7 +320,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               alignItems: "center",
               justifyContent: "center",
               overflow: "hidden",
+              cursor: item.type === "image" ? "pointer" : undefined,
             }}
+            onClick={
+              item.type === "image"
+                ? () => setSelectedImage(item.src)
+                : undefined
+            }
           >
             {item.type === "image" ? (
               <img
