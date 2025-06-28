@@ -62,30 +62,6 @@ export default function Home() {
     }, 1000);
   };
 
-  // Scroll handler untuk rightSection
-  const handleRightSectionScroll = () => {
-    const el = rightSectionRef.current;
-    if (!el) return;
-    // Scroll ke bawah: select tahun sebelumnya
-    if (el.scrollTop + el.clientHeight >= el.scrollHeight - 2) {
-      if (years.length > 0 && selectedYear != null) {
-        const idx = years.findIndex((y) => y === selectedYear);
-        if (idx > 0) {
-          setSelectedYear(years[idx - 1]);
-        }
-      }
-    }
-    // Scroll ke atas: select tahun berikutnya
-    if (el.scrollTop <= 2) {
-      if (years.length > 0 && selectedYear != null) {
-        const idx = years.findIndex((y) => y === selectedYear);
-        if (idx < years.length - 1) {
-          setSelectedYear(years[idx + 1]);
-        }
-      }
-    }
-  };
-
   // Helper function untuk translation
   const t = (key: string, params?: any) => {
     const keys = key.split(".");
@@ -152,45 +128,31 @@ export default function Home() {
         </div>
 
         {/* Bagian Kanan */}
-        <div
-          className={styles.rightSection}
-          ref={rightSectionRef}
-          onScroll={handleRightSectionScroll}
-        >
+        <div className={styles.rightSection} ref={rightSectionRef}>
           <main className={styles.main}>
-            {projectsLoading && <p>{t("home.loading")}</p>}
-            {projectsError && (
-              <p>{t("home.error", { error: projectsError })}</p>
-            )}
+            {projectsLoading && <p>{t('home.loading')}</p>}
+            {projectsError && <p>{t('home.error', { error: projectsError })}</p>}
             {!projectsLoading && !projectsError && projects.length === 0 && (
-              <p>{t("home.noProjects", { year: selectedYear })}</p>
+              <p>{t('home.noProjects', { year: selectedYear })}</p>
             )}
-            {!projectsLoading &&
-              !projectsError &&
-              projects.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  appName={project.app_name}
-                  companyName={project.company_name}
-                  companyLogo={project.company_logo}
-                  appLogo={project.app_logo}
-                  country={project.country}
-                  startDate={project.start_date}
-                  endDate={project.end_date}
-                  description={
-                    project.description?.[locale] ||
-                    project.description?.["en"] ||
-                    ""
-                  }
-                  media={
-                    project.media?.map((item) => ({
-                      type: item.type,
-                      src: item.url,
-                    })) || []
-                  }
-                  tags={project.tags || []}
-                />
-              ))}
+            {!projectsLoading && !projectsError && projects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                appName={project.app_name}
+                companyName={project.company_name}
+                companyLogo={project.company_logo}
+                appLogo={project.app_logo}
+                country={project.country}
+                startDate={project.start_date}
+                endDate={project.end_date}
+                description={project.description?.[locale] || project.description?.['en'] || ''}
+                media={project.media?.map(item => ({
+                  type: item.type,
+                  src: item.url
+                })) || []}
+                tags={project.tags || []}
+              />
+            ))}
           </main>
         </div>
       </div>

@@ -153,6 +153,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             position: "relative",
             marginBottom: isMobile ? 8 : 0,
             flexShrink: 0,
+            border: '2px solid #232826',
+            boxSizing: 'border-box',
+            padding: isMobile ? 2 : 4,
           }}
         >
           {!logoError && appLogo ? (
@@ -160,8 +163,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               src={appLogo}
               alt="App Logo"
               style={{
-                width: isMobile ? 40 : 60,
-                height: isMobile ? 40 : 60,
+                width: isMobile ? 50 : 75,
+                height: isMobile ? 50 : 75,
                 borderRadius: "50%",
                 objectFit: "cover",
               }}
