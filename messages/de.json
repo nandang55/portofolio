@@ -2,17 +2,18 @@
   "navigation": {
     "home": "Startseite",
     "projects": "Projekte",
-    "about": "Über uns",
+    "about": "Über",
     "contact": "Kontakt"
   },
   "home": {
-    "title": "Projektjahr-Liste",
+    "title": "Projekt-Jahresliste",
     "loading": "Lade Jahresdaten...",
     "error": "Fehler: {error}",
     "projectByYear": "Projekte nach Jahr:",
     "selectedYear": "Ausgewähltes Jahr: {year}",
     "scrollHint": "Scrollen Sie {count} mal, um das Jahr zu ändern",
-    "yearList": "Jahresliste"
+    "yearList": "Jahresliste",
+    "noProjects": "Keine Projekte für das Jahr {year}"
   },
   "common": {
     "learn": "Lernen",

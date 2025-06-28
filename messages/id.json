@@ -12,7 +12,8 @@
     "projectByYear": "Project berdasarkan tahun:",
     "selectedYear": "Tahun terpilih: {year}",
     "scrollHint": "Scroll {count} kali untuk mengubah tahun",
-    "yearList": "Daftar Tahun"
+    "yearList": "Daftar Tahun",
+    "noProjects": "Tidak ada project untuk tahun {year}"
   },
   "common": {
     "learn": "Belajar",

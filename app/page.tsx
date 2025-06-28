@@ -3,6 +3,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { useProjectYears } from "../hooks/useProjectYears";
+import { useProjectsByYear } from "../hooks/useProjectsByYear";
 import { useState, useEffect, useRef } from "react";
 import { useLocalization } from "../hooks/useLocalization";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
@@ -15,6 +16,9 @@ export default function Home() {
   const scrollThreshold = 3;
   const { locale, setLocale, messages } = useLocalization();
   const rightSectionRef = useRef<HTMLDivElement>(null);
+  
+  // Hook untuk mengambil project berdasarkan tahun terpilih
+  const { projects, loading: projectsLoading, error: projectsError } = useProjectsByYear(selectedYear);
 
   // Set tahun terbaru sebagai default saat data dimuat
   useEffect(() => {
@@ -144,51 +148,29 @@ export default function Home() {
         {/* Bagian Kanan */}
         <div className={styles.rightSection} ref={rightSectionRef} onScroll={handleRightSectionScroll}>
           <main className={styles.main}>
-            {/* 3 ProjectCard dummy */}
-            <ProjectCard
-              appName="GreenApp"
-              companyName="GreenTech"
-              companyLogo="https://placehold.co/60x60?text=GT"
-              appLogo="https://placehold.co/60x60?text=GA"
-              country="Germany"
-              startDate="2023-01"
-              endDate="2023-12"
-              description="Aplikasi monitoring lingkungan dengan fitur AI dan IoT."
-              media={[
-                { type: 'image', src: 'https://placehold.co/180x120?text=Img1' },
-                { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-                { type: 'image', src: 'https://placehold.co/180x120?text=Img2' },
-              ]}
-            />
-            <ProjectCard
-              appName="EduLearn"
-              companyName="EduSoft"
-              companyLogo="https://placehold.co/60x60?text=ES"
-              appLogo="https://placehold.co/60x60?text=EL"
-              country="Netherlands"
-              startDate="2022-03"
-              endDate="2022-11"
-              description="Platform pembelajaran daring interaktif untuk sekolah dan universitas."
-              media={[
-                { type: 'image', src: 'https://placehold.co/180x120?text=Img3' },
-                { type: 'image', src: 'https://placehold.co/180x120?text=Img4' },
-                { type: 'video', src: 'https://www.w3schools.com/html/movie.mp4' },
-              ]}
-            />
-            <ProjectCard
-              appName="HealthTrack"
-              companyName="MediCare"
-              companyLogo="https://placehold.co/60x60?text=MC"
-              appLogo="https://placehold.co/60x60?text=HT"
-              country="Spain"
-              startDate="2021-06"
-              endDate="2022-01"
-              description="Aplikasi pelacakan kesehatan dan konsultasi dokter online."
-              media={[
-                { type: 'image', src: 'https://placehold.co/180x120?text=Img5' },
-                { type: 'image', src: 'https://placehold.co/180x120?text=Img6' },
-              ]}
-            />
+            {projectsLoading && <p>{t('home.loading')}</p>}
+            {projectsError && <p>{t('home.error', { error: projectsError })}</p>}
+            {!projectsLoading && !projectsError && projects.length === 0 && (
+              <p>{t('home.noProjects', { year: selectedYear })}</p>
+            )}
+            {!projectsLoading && !projectsError && projects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                appName={project.app_name}
+                companyName={project.company_name}
+                companyLogo={project.company_logo}
+                appLogo={project.app_logo}
+                country={project.country}
+                startDate={project.start_date}
+                endDate={project.end_date}
+                description={project.description?.[locale] || project.description?.['en'] || ''}
+                media={project.media?.map(item => ({
+                  type: item.type,
+                  src: item.url
+                })) || []}
+                tags={project.tags || []}
+              />
+            ))}
           </main>
         </div>
       </div>

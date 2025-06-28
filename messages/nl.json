@@ -2,24 +2,25 @@
   "navigation": {
     "home": "Home",
     "projects": "Projecten",
-    "about": "Over ons",
+    "about": "Over",
     "contact": "Contact"
   },
   "home": {
-    "title": "Projectjaar Lijst",
+    "title": "Project Jaarlijst",
     "loading": "Jaardata laden...",
     "error": "Fout: {error}",
     "projectByYear": "Projecten per jaar:",
     "selectedYear": "Geselecteerd jaar: {year}",
-    "scrollHint": "Scroll {count} keer om het jaar te wijzigen",
-    "yearList": "Jaarlijst"
+    "scrollHint": "Scroll {count} keer om jaar te wijzigen",
+    "yearList": "Jaarlijst",
+    "noProjects": "Geen projecten voor jaar {year}"
   },
   "common": {
     "learn": "Leren",
     "examples": "Voorbeelden",
     "goToNextjs": "Ga naar nextjs.org →",
     "deployNow": "Nu implementeren",
-    "readDocs": "Documentatie lezen",
+    "readDocs": "Lees documentatie",
     "getStarted": "Begin met bewerken",
     "saveChanges": "Opslaan en wijzigingen direct zien"
   },

@@ -12,7 +12,8 @@
     "projectByYear": "Proyectos por año:",
     "selectedYear": "Año seleccionado: {year}",
     "scrollHint": "Desplázate {count} veces para cambiar el año",
-    "yearList": "Lista de Años"
+    "yearList": "Lista de Años",
+    "noProjects": "No hay proyectos para el año {year}"
   },
   "common": {
     "learn": "Aprender",

@@ -12,7 +12,8 @@
     "projectByYear": "Projects by year:",
     "selectedYear": "Selected year: {year}",
     "scrollHint": "Scroll {count} times to change year",
-    "yearList": "Year List"
+    "yearList": "Year List",
+    "noProjects": "No projects for year {year}"
   },
   "common": {
     "learn": "Learn",

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface ProjectCardProps {
   appName: string;
@@ -10,6 +10,7 @@ interface ProjectCardProps {
   endDate: string;
   description: string;
   media: { type: 'image' | 'video'; src: string }[];
+  tags?: string[];
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -22,7 +23,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   endDate,
   description,
   media,
+  tags = [],
 }) => {
+  const [logoError, setLogoError] = useState(false);
+  const [companyLogoError, setCompanyLogoError] = useState(false);
+
+  // Ambil inisial dari nama (maksimal 2 huruf)
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map((word) => word[0]?.toUpperCase() || '')
+      .join('')
+      .slice(0, 2);
+  };
+
   return (
     <div style={{
       background: '#232826',
@@ -36,8 +50,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       margin: '0 auto',
     }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 24 }}>
-        <div style={{ minWidth: 80, minHeight: 80, borderRadius: '50%', background: '#40604e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 18, color: '#fff' }}>
-          <img src={appLogo} alt="App Logo" style={{ width: 60, height: 60, borderRadius: '50%', objectFit: 'cover' }} />
+        <div style={{ minWidth: 80, minHeight: 80, borderRadius: '50%', background: '#40604e', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 28, color: '#fff', position: 'relative' }}>
+          {!logoError && appLogo ? (
+            <img
+              src={appLogo}
+              alt="App Logo"
+              style={{ width: 60, height: 60, borderRadius: '50%', objectFit: 'cover' }}
+              onError={() => setLogoError(true)}
+            />
+          ) : (
+            <span>{getInitials(appName)}</span>
+          )}
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16 }}>
@@ -49,12 +72,43 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               </div>
               <div style={{ fontSize: 13, color: '#b7c9b7', marginTop: 2 }}>{startDate} - {endDate}</div>
             </div>
-            <div style={{ minWidth: 60, minHeight: 60, borderRadius: 8, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img src={companyLogo} alt="Company Logo" style={{ width: 40, height: 40, objectFit: 'contain' }} />
+            <div style={{ minWidth: 60, minHeight: 60, borderRadius: 8, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 20, color: '#40604e' }}>
+              {!companyLogoError && companyLogo ? (
+                <img
+                  src={companyLogo}
+                  alt="Company Logo"
+                  style={{ width: 40, height: 40, objectFit: 'contain' }}
+                  onError={() => setCompanyLogoError(true)}
+                />
+              ) : (
+                <span>{getInitials(companyName)}</span>
+              )}
             </div>
           </div>
         </div>
       </div>
+      
+      {/* Tags */}
+      {tags.length > 0 && (
+        <div style={{ display: 'flex', gap: 8, marginTop: 16, flexWrap: 'wrap' }}>
+          {tags.map((tag, index) => (
+            <span
+              key={index}
+              style={{
+                background: '#40604e',
+                color: '#fff',
+                padding: '4px 12px',
+                borderRadius: 16,
+                fontSize: 12,
+                fontWeight: 500,
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+      
       <div style={{ margin: '24px 0', width: '100%', overflowX: 'auto', display: 'flex', gap: 16, justifyContent: 'center', alignItems: 'center' }}>
         {media.map((item, idx) => (
           <div key={idx} style={{ minWidth: 180, minHeight: 120, borderRadius: 12, background: '#181c1a', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
