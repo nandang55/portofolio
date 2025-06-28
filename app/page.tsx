@@ -86,6 +86,27 @@ export default function Home() {
       }}>
         <h1 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1rem' }}>{t('title')}</h1>
         <p style={{ fontSize: '1.2rem', fontWeight: 400 }}>{t('desc')}</p>
+        <a
+          href="/create"
+          style={{
+            display: 'inline-block',
+            marginTop: '2rem',
+            padding: '0.85rem 2.2rem',
+            background: 'linear-gradient(90deg, #578169 60%, #31493C 100%)',
+            color: '#fff',
+            fontWeight: 700,
+            fontSize: '1.1rem',
+            borderRadius: '32px',
+            textDecoration: 'none',
+            boxShadow: '0 2px 12px 0 rgba(0,0,0,0.10)',
+            transition: 'background 0.2s, box-shadow 0.2s',
+            letterSpacing: '0.02em',
+          }}
+          onMouseOver={e => (e.currentTarget.style.background = 'linear-gradient(90deg, #31493C 60%, #578169 100%)')}
+          onMouseOut={e => (e.currentTarget.style.background = 'linear-gradient(90deg, #578169 60%, #31493C 100%)')}
+        >
+          Create Now
+        </a>
       </div>
     </div>
   );
