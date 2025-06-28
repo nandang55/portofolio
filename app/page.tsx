@@ -5,27 +5,33 @@ import { LanguageSwitcher } from "../components/LanguageSwitcher";
 const messages = {
   id: {
     title: "Portofolio",
-    desc: "Buat dan bagikan portofoliomu dengan bagdja.com"
+    desc: "Buat dan bagikan portofoliomu dengan bagdja.com",
+    create: "Buat Sekarang"
   },
   en: {
     title: "Portfolio",
-    desc: "Make and share your portofolio with bagdja.com"
+    desc: "Make and share your portofolio with bagdja.com",
+    create: "Create Now"
   },
   sp: {
     title: "Portafolio",
-    desc: "Crea y comparte tu portafolio con bagdja.com"
+    desc: "Crea y comparte tu portafolio con bagdja.com",
+    create: "Crear Ahora"
   },
   cn: {
     title: "作品集",
-    desc: "使用 bagdja.com 创建并分享你的作品集"
+    desc: "使用 bagdja.com 创建并分享你的作品集",
+    create: "立即创建"
   },
   de: {
     title: "Portfolio",
-    desc: "Erstelle und teile dein Portfolio mit bagdja.com"
+    desc: "Erstelle und teile dein Portfolio mit bagdja.com",
+    create: "Jetzt erstellen"
   },
   nl: {
     title: "Portfolio",
-    desc: "Maak en deel je portfolio met bagdja.com"
+    desc: "Maak en deel je portfolio met bagdja.com",
+    create: "Nu maken"
   }
 };
 
@@ -43,7 +49,7 @@ export default function Home() {
     localStorage.setItem('preferred-language', newLocale);
   };
 
-  const t = (key: 'title' | 'desc') => {
+  const t = (key: 'title' | 'desc' | 'create') => {
     return messages[locale as keyof typeof messages]?.[key] || messages['en'][key];
   };
 
@@ -105,7 +111,7 @@ export default function Home() {
           onMouseOver={e => (e.currentTarget.style.background = 'linear-gradient(90deg, #31493C 60%, #578169 100%)')}
           onMouseOut={e => (e.currentTarget.style.background = 'linear-gradient(90deg, #578169 60%, #31493C 100%)')}
         >
-          Create Now
+          {t('create')}
         </a>
       </div>
     </div>
