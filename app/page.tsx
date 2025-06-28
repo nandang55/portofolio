@@ -62,21 +62,21 @@ export default function Home() {
   const handleRightSectionScroll = () => {
     const el = rightSectionRef.current;
     if (!el) return;
-    // Scroll ke bawah: select tahun berikutnya
+    // Scroll ke bawah: select tahun sebelumnya
     if (el.scrollTop + el.clientHeight >= el.scrollHeight - 2) {
-      if (years.length > 0 && selectedYear != null) {
-        const idx = years.findIndex(y => y === selectedYear);
-        if (idx < years.length - 1) {
-          setSelectedYear(years[idx + 1]);
-        }
-      }
-    }
-    // Scroll ke atas: select tahun sebelumnya
-    if (el.scrollTop <= 2) {
       if (years.length > 0 && selectedYear != null) {
         const idx = years.findIndex(y => y === selectedYear);
         if (idx > 0) {
           setSelectedYear(years[idx - 1]);
+        }
+      }
+    }
+    // Scroll ke atas: select tahun berikutnya
+    if (el.scrollTop <= 2) {
+      if (years.length > 0 && selectedYear != null) {
+        const idx = years.findIndex(y => y === selectedYear);
+        if (idx < years.length - 1) {
+          setSelectedYear(years[idx + 1]);
         }
       }
     }
