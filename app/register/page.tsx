@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { LanguageSwitcher } from "../../components/LanguageSwitcher";
+import { FaCamera, FaPen } from 'react-icons/fa';
 
 const messages = {
   id: {
@@ -242,11 +243,70 @@ export default function RegisterPage() {
         }}>
           <div style={{ fontWeight: 700, color: '#fff', fontSize: '1.15rem', marginBottom: 20 }}>{t('profile')}</div>
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '180px 1fr', gap: 24, alignItems: 'flex-start', width: '100%' }}>
-            {/* Foto Profil di kiri */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+            {/* Foto Profil di kiri, custom uploader */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, position: 'relative', minHeight: 120 }}>
               <label style={{ color: '#b7c9b7', fontWeight: 500, marginBottom: 4 }}>{t('photo')}</label>
-              <input type="file" accept="image/*" onChange={e => setPhoto(e.target.files?.[0] || null)} style={{ marginBottom: 8 }} />
-              {photo && <img src={URL.createObjectURL(photo)} alt="preview" style={{ width: 72, height: 72, borderRadius: '50%', objectFit: 'cover', marginTop: 4, border: '2px solid #40604e' }} />}
+              <div style={{ position: 'relative', width: 100, height: 100 }}>
+                <input
+                  id="profile-photo-input"
+                  type="file"
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  onChange={e => setPhoto(e.target.files?.[0] || null)}
+                />
+                {photo ? (
+                  <>
+                    <img
+                      src={URL.createObjectURL(photo)}
+                      alt="preview"
+                      style={{ width: 100, height: 100, borderRadius: '50%', objectFit: 'cover', border: '2.5px solid #40604e', background: '#232826' }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => document.getElementById('profile-photo-input')?.click()}
+                      style={{
+                        position: 'absolute',
+                        right: 0,
+                        bottom: 0,
+                        background: '#fff',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: 36,
+                        height: 36,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxShadow: '0 2px 8px 0 rgba(0,0,0,0.10)',
+                        cursor: 'pointer',
+                        padding: 0,
+                      }}
+                      aria-label="Edit photo"
+                    >
+                      <FaPen color="#40604e" size={16} />
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById('profile-photo-input')?.click()}
+                    style={{
+                      width: 100,
+                      height: 100,
+                      borderRadius: '50%',
+                      background: '#232826',
+                      border: '2.5px solid #40604e',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      position: 'relative',
+                    }}
+                    aria-label="Upload photo"
+                  >
+                    <FaCamera color="#b7c9b7" size={28} />
+                  </button>
+                )}
+              </div>
             </div>
             {/* Nama Depan, Nama Belakang, Deskripsi di kanan */}
             <div style={{ width: '100%' }}>
