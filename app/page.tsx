@@ -16,6 +16,7 @@ export default function Home() {
   const scrollThreshold = 3;
   const { locale, setLocale, messages } = useLocalization();
   const rightSectionRef = useRef<HTMLDivElement>(null);
+  const [imgError, setImgError] = useState(false);
 
   // Hook untuk mengambil project berdasarkan tahun terpilih
   const {
@@ -85,12 +86,63 @@ export default function Home() {
       <div className={styles.container}>
         {/* Bagian Kiri */}
         <div className={styles.leftSection} onWheel={handleYearScroll}>
-          <div className={styles.header}>
-            <h1>{t("home.title")}</h1>
-            <LanguageSwitcher
-              currentLocale={locale}
-              onLanguageChange={setLocale}
-            />
+          <div className={styles.header} style={{ position: 'relative' }}>
+            <div style={{ display: 'flex', alignItems: 'start', gap: '1rem' }}>
+              {imgError ? (
+                <div style={{
+                  aspectRatio: '1/1',
+                  width: 48,
+                  minWidth: 32,
+                  maxWidth: 64,
+                  height: 'auto',
+                  minHeight: 32,
+                  maxHeight: 64,
+                  borderRadius: '50%',
+                  background: '#fff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 700,
+                  fontSize: '1.1rem',
+                  color: '#578169',
+                  userSelect: 'none',
+                  boxSizing: 'border-box',
+                }}>
+                  NG
+                </div>
+              ) : (
+                <Image
+                  src="/user-photo.jpg"
+                  alt="User Photo"
+                  width={48}
+                  height={48}
+                  style={{
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    background: '#fff',
+                    aspectRatio: '1/1',
+                    width: 48,
+                    minWidth: 32,
+                    maxWidth: 64,
+                    height: 'auto',
+                    minHeight: 32,
+                    maxHeight: 64,
+                    boxSizing: 'border-box',
+                  }}
+                  onError={() => setImgError(true)}
+                />
+              )}
+              <div>
+                <div style={{ fontWeight: 700, fontSize: '1.2rem', color: '#fff', lineHeight: 1.2, marginBottom: '0.1rem', paddingRight: '4.5rem' }}>Nandang Hermawan</div>
+                <div style={{ fontSize: '0.8rem', color: '#b7c9b7', lineHeight: 1.2 }}>Fullstack Developer & UI/UX Enthusiast</div>
+              </div>
+            </div>
+            <div style={{ position: 'absolute', top: 0, right: 0, zIndex: 2 }}>
+              <LanguageSwitcher
+                currentLocale={locale}
+                onLanguageChange={setLocale}
+              />
+            </div>
           </div>
           {loading && <p>{t("home.loading")}</p>}
           {error && <p>{t("home.error", { error })}</p>}
